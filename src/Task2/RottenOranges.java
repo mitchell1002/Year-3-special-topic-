@@ -2,64 +2,9 @@ package Task2;
 
 import java.util.Scanner;
 
-class Queue {
-    Node head, tail;
-    int size;
 
-    static class Node {
-        int data;
-        Node next;
 
-        Node(int data) {
-            this.data = data;
-            next = null;
-        }
-    }
-
-    public Queue() {
-        this.tail = null;
-        this.head = null;
-        this.size = 0; // Initialize size to 0
-    }
-
-    public boolean isEmpty() {
-        return head == null;
-    }
-
-    public void enqueue(int item) {
-        Node node = new Node(item);
-        if (isEmpty()) {
-            head = node;
-            tail = node;
-        } else {
-            tail.next = node;
-            tail = node;
-        }
-        size++; // Increment size when enqueueing
-    }
-
-    public int dequeue() {
-        if (isEmpty()) {
-            System.out.println("Queue is empty");
-            return Integer.MIN_VALUE; // Return a sentinel value if the queue is empty
-        }
-        int item = head.data;
-        if (head != tail) {
-            head = head.next;
-        } else {
-            head = null; // If there was only one node, set head and tail to null
-            tail = null;
-        }
-        size--; // Decrement size when dequeueing
-        return item;
-    }
-
-    public int getSize() {
-        return size; // Return the current size of the queue
-    }
-}
-
-class RottenOranges {
+public class RottenOranges {
     public static void userInput(Scanner scanner, int[][] grid) {
         System.out.println("Please enter the values of the oranges: ");
         for (int i = 0; i < grid.length; i++) {
@@ -71,7 +16,7 @@ class RottenOranges {
         // using scanner is reading the integers from the user and fills in the grid
     }
 
-    private static int readGrid(int[][] grid) {
+    public static int readGrid(int[][] grid) {
         Queue queue = new Queue(); // Create an instance of the Queue
         int fresh = 0; // This keeps track of the oranges the user puts
         // I am using queue because it will store the position of each orange and if the fresh one gets rotten see if the next orange gets rotten
@@ -130,7 +75,7 @@ class RottenOranges {
         } // This loops checks if we still have isolated 1 which is fresh oranges and then prints out
     }
 
-    private static void displayResults(int time, int[][] grid) {
+    public static void displayResults(int time, int[][] grid) {
         if (time != -1) {
             System.out.println("All oranges have rotted in: " + time + " seconds.");
         } else {
@@ -140,22 +85,5 @@ class RottenOranges {
         }
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter the number of rows: ");
-        int rows = scanner.nextInt();
-        System.out.print("Enter the number of columns: ");
-        int cols = scanner.nextInt();
-
-        int[][] grid = new int[rows][cols];
-
-        userInput(scanner, grid);
-
-        int time = readGrid(grid);
-
-        displayResults(time, grid);
-
-        scanner.close();
-    }
 }
